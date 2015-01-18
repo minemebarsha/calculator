@@ -13,49 +13,98 @@ public class Main {
 		ArrayList<Double> list = new ArrayList<Double>();
 		Operation operation = new Operation();
 
-		while (k == 0 || k == 1) {
+		while (true) {
 
-			System.out.println("menu:");
-			System.out.println("press 1 for addition" + "(+)");
-			System.out.println("press 2 for subtraction" + "(-)");
-			System.out.println("press 3 for multiplication" + "(*)");
-			System.out.println("press 4 for division" + "(/)");
-			
 			if (k == 0) {
-				System.out.println("press 5 for input" + "(<-)");
+				operation.printCommand(k);
+				k++;
 			} else {
-				System.out.println("press 5 to change your input" + "(<-)");
+				operation.printCommand(k);
 			}
-	
-			System.out.println("press other numbers for exit" + "(->)");
 
 			Scanner scanner2 = new Scanner(System.in);
 			int j = scanner2.nextInt();
 
 			switch (j) {
+			case 0:
+				System.out
+						.println("successfully exited...thank you for using my calculator :D :D");
+				return;
 			case 1:
-				i = operation.addition(list);
-				System.out.println("ans=" + i);
+				list = operation.getNum();
 				break;
 			case 2:
-				i = operation.subtraction(list);
-				System.out.println("ans=" + i);
-				break;
+				if (list.isEmpty()) {
+					System.out.println("error..please follow menu :@ :@");
+					k = 0;
+					break;
+				} else {
+
+					list = operation.update(list);
+					break;
+				}
 			case 3:
-				i = operation.multiplication(list);
-				System.out.println("ans=" + i);
-				break;
+				if (list.isEmpty()) {
+					System.out.println("error..please follow menu :@ :@");
+					k = 0;
+					break;
+				} else {
+
+					i = operation.addition(list);
+					System.out.println("ans=" + i);
+					System.out.println("inputs:");
+					operation.printInputs(list);
+					break;
+				}
 			case 4:
-				i = operation.division(list);
-				System.out.println("ans=" + i);
-				break;
+				if (list.isEmpty()) {
+					System.out.println("error..please follow menu :@ :@");
+					k = 0;
+					break;
+				} else {
+
+					i = operation.subtraction(list);
+					System.out.println("ans=" + i);
+					System.out.println("inputs:");
+					operation.printInputs(list);
+					break;
+				}
+
 			case 5:
-				list = operation.getNum();
-				k++;
-				break;
+				if (list.isEmpty()) {
+					System.out.println("error..please follow menu :@ :@");
+					k = 0;
+					break;
+				} else {
+
+					i = operation.multiplication(list);
+					System.out.println("ans=" + i);
+					System.out.println("inputs:,");
+					operation.printInputs(list);
+					break;
+
+				}
+			case 6:
+				if (list.isEmpty()) {
+					System.out.println("error..please follow menu :@ :@");
+					k = 0;
+					break;
+				} else {
+
+					i = operation.division(list);
+					System.out.println("ans=" + i);
+					System.out.println("inputs:");
+					operation.printInputs(list);
+					break;
+				}
+
 			default:
-				k = -1;
-				System.out.println("successfully exited...thank you for using my calculator :D :D");
+				if (list.isEmpty()) {
+					k = 0;
+				} else {
+					k = 1;
+				}
+				System.out.println("error..please follow menu :@ :@");
 				break;
 			}
 
